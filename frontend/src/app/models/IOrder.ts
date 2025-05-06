@@ -4,7 +4,7 @@ export interface IOrder {
   surname: string;
   email: string;
   phone: string;
-  age: number;
+  age: number | null;
   course: string;
   course_format: string;
   course_type: string;
@@ -14,4 +14,6 @@ export interface IOrder {
   created_at: string;
   utm?: string;
   msg?: string;
+  group?: string | null;
+  manager?: string | null;
 }

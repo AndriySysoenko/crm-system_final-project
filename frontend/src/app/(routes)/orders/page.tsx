@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { getOrders } from '@/app/service/api.service';
 import OrdersComponent from '@/app/components/orders/OrdersComponent';
+import PaginationComponent from '@/app/components/pagination/PaginationComponent';
 
 type SearchParams = { page?: string };
 type MyProps = {
@@ -9,9 +10,9 @@ type MyProps = {
 
 const OrdersPage:FC<MyProps> =async ({ searchParams }) => {
   const params = await searchParams;
-  const page:number = params.page ? +params.page : 1;
-  const { data } = await getOrders(page);
-  if(!data || data.length === 0) {
+  const page: number = params.page ? +params.page : 1;
+  const result = await getOrders(page);
+  if(!result.data || result.data.length === 0) {
     return <div>No orders</div>
   }
 
@@ -32,15 +33,18 @@ const OrdersPage:FC<MyProps> =async ({ searchParams }) => {
         <th>Status</th>
         <th>Sum</th>
         <th>Paid</th>
+        <th>Group</th>
         <th>Created</th>
+        <th>Manager</th>
       </tr>
       </thead>
       <tbody>
-    {data.map((order, index) => (
+    {result.data.map((order, index) => (
       <OrdersComponent item={order} key={order.id?.toString() || `order-${index}`} />
     ))}
       </tbody>
       </table>
+      <PaginationComponent currentPage={page} totalPages={result.pages} basePath={'/orders'} />
     </div>
   );
 }

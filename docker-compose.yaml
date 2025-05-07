@@ -12,6 +12,19 @@ services:
     networks:
       - app-network
 
+#  frontend:
+#    build:
+#      context: ./frontend
+#    container_name: frontend
+#    ports:
+#      - '3000:3000' # Next.js працює на 3000
+#    env_file:
+#      - ./frontend/.env
+#    depends_on:
+#      - backend
+#    networks:
+#      - app-network
+
   redis:
     image: redis:latest
     container_name: redis

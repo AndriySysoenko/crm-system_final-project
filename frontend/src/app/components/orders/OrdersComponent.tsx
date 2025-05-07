@@ -3,7 +3,7 @@ import { IOrder } from '@/app/models/IOrder';
 
 type OrderProps = {item: IOrder};
 
-const OrdersComponent:FC<OrderProps> = ({ item }) => {
+const OrdersComponent:FC<OrderProps> = ({ item}) => {
   const renderValue = (value: string | number | null | undefined, key?: string): string | number => {
     if (key === 'age' && value === 0) return 'null';
     return value === null || value === undefined || value === '' ? 'null' : value;
@@ -11,7 +11,7 @@ const OrdersComponent:FC<OrderProps> = ({ item }) => {
 
   return (
     <tr>
-      <td>{renderValue(item.id)}</td>
+      <td>{renderValue(item._id)}</td>
       <td>{renderValue(item.name)}</td>
       <td>{renderValue(item.surname)}</td>
       <td>{renderValue(item.email)}</td>

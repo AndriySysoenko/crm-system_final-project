@@ -10,7 +10,7 @@ type PaginationProps = {
 
 const PaginationComponent:FC<PaginationProps> = ({ currentPage, totalPages, basePath, queryParams = {} }) => {
   const buildUrl = (page: number) => {
-    const params = new URLSearchParams({ ...queryParams, page: page.toString() });
+    const params = new URLSearchParams({page: page.toString(), ...queryParams });
     return `${basePath}?${params}`};
 
   const renderPages = () => {

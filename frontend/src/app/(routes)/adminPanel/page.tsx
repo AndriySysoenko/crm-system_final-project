@@ -5,7 +5,6 @@ import CreateUserComponent from '@/app/components/users/CreateUserComponent';
 import { UserDBResponse } from '@/app/models/UserDBResponse';
 
 const UsersPage:FC= () => {
-  // const data  = await getUsers();
   const [data, setData] = useState<UserDBResponse[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false)
 

@@ -1,24 +1,16 @@
-'use server';
+// 'use server';
 
 import { OrderDBResponse } from '@/app/models/OrderDBResponse';
 import { UserDBResponse } from '@/app/models/UserDBResponse';
 import { CreateUserType } from '@/app/models/CreateUserType';
-import { cookies } from 'next/headers';
+import { fetchWithAuth, getAccessToken } from '@/app/components/helper/api.helper';
 
 export const getOrders = async (page: number, sort?: string): Promise<OrderDBResponse> => {
   const params = new URLSearchParams();
   params.append('page', page.toString());
   if (sort) params.append('sort', sort);
 
-  const accessToken = localStorage.getItem('accessToken');
-  return await fetch(`http://localhost:3000/student?${params.toString()}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`,
-    },
-
-  })
+  return await fetchWithAuth(`http://localhost:3000/student?${params.toString()}`)
   .then(value => value.json());
 };
 

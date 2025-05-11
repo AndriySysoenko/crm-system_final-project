@@ -11,11 +11,23 @@ export const loginSchema = Joi.object({
       'string.pattern.base': 'Invalid email format',
     }),
 
-  password: Joi.string()
-    // .pattern(/^\S*(?=\S{8,})(?=\S*[A-Z])(?=\S*\d)\S*$/)
-    .required()
-    .messages({
-      'string.empty': 'Password is required',
-      'string.pattern.base': 'Password must be at least 8 characters, contain 1 uppercase letter and 1 number',
-    }),
+  password: Joi.string().required().messages({
+    'string.empty': 'Password is required',
+  }),
+}).custom((value, helpers) => {
+  const isDefaultAdmin = value.email === 'admin@gmail.com' && value.password === 'admin';
+
+  if (!isDefaultAdmin) {
+    const strongPasswordRegex = /^\S*(?=\S{8,})(?=\S*[A-Z])(?=\S*\d)\S*$/;
+    if (!strongPasswordRegex.test(value.password)) {
+      return helpers.error('any.custom', {
+        message:
+          'Password must be at least 8 characters, contain 1 uppercase letter and 1 number',
+      });
+    }
+  }
+
+  return value;
+}).messages({
+  'any.custom': '{{#message}}',
 });

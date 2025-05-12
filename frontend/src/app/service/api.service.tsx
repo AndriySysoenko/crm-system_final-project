@@ -3,7 +3,8 @@
 import { OrderDBResponse } from '@/app/models/OrderDBResponse';
 import { UserDBResponse } from '@/app/models/UserDBResponse';
 import { CreateUserType } from '@/app/models/CreateUserType';
-import { fetchWithAuth, getAccessToken } from '@/app/components/helper/api.helper';
+import { fetchWithAuth } from '@/app/components/helper/api.helper';
+import { router } from 'next/client';
 
 export const getOrders = async (page: number, sort?: string): Promise<OrderDBResponse> => {
   const params = new URLSearchParams();
@@ -15,12 +16,12 @@ export const getOrders = async (page: number, sort?: string): Promise<OrderDBRes
 };
 
 export const getUsers = async (): Promise<UserDBResponse[]> => {
-  return await fetch(`http://localhost:3000/user`)
+  return await fetchWithAuth(`http://localhost:3000/user`)
   .then(value => value.json());
 };
 
 export const createUser = async (user: CreateUserType): Promise<UserDBResponse> => {
-  return await fetch(`http://localhost:3000/user`, {
+  return await fetchWithAuth(`http://localhost:3000/user`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -29,8 +30,6 @@ export const createUser = async (user: CreateUserType): Promise<UserDBResponse> 
   })
   .then(value => value.json());
 };
-
-
 
 export const loginAction = async (prevState: any, formData: FormData): Promise<{ accessToken: string, error: string }> => {
   const email = formData.get('email');
@@ -52,5 +51,14 @@ export const loginAction = async (prevState: any, formData: FormData): Promise<{
   } catch (error) {
     return { accessToken: '', error: 'An error occurred' };
   }
+};
 
+export const logout = async () => {
+  const response = await fetchWithAuth(`http://localhost:3000/auth/logout`, {
+    method: 'DELETE',
+  })
+  if (!response.ok) {
+    return router.push('/login');
+  }
 }
+  // return router.push('/login');}

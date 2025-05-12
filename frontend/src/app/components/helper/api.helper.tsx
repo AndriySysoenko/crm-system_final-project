@@ -1,3 +1,4 @@
+
 export const fetchWithAuth = async (
   input: RequestInfo,
   init: RequestInit = {}
@@ -14,8 +15,16 @@ export const fetchWithAuth = async (
     'Content-Type': 'application/json',
   };
 
-  return fetch(input, {
+  const response = await fetch(input, {
     ...init,
     headers,
   });
+
+  if (response.status === 401) {
+    localStorage.removeItem('accessToken');
+    window.location.href = '/login';
+    throw new Error('Unauthorized');
+  }
+
+  return response;
 };

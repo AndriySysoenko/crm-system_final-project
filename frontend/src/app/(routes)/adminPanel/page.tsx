@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { createUser, getUsers } from '@/app/service/api.service';
 import CreateUserComponent from '@/app/components/users/CreateUserComponent';
 import { UserDBResponse } from '@/app/models/UserDBResponse';
+import Menu from '@/app/components/menu/Menu';
 
 const UsersPage:FC= () => {
   const [data, setData] = useState<UserDBResponse[]>([]);
@@ -12,9 +13,10 @@ const UsersPage:FC= () => {
     const fetchUsers = async () => {
       try {
         const users = await getUsers();
+        console.log('Fetched users:', users);
         setData(users);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        throw new Error ('Error fetching data:', error);
       }
     };
     fetchUsers()
@@ -29,6 +31,7 @@ const UsersPage:FC= () => {
 
   return (
     <div>
+      <Menu/>
       <button onClick={()=>{setIsModalOpen(true)}}>Create</button>
 
       <CreateUserComponent isOpen={isModalOpen} onClose={()=>{setIsModalOpen(false)}} onCreate={handleCreateUser}/>

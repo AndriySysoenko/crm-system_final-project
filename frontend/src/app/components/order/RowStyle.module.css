@@ -1,0 +1,20 @@
+.row {
+    font-size: 16px;
+    padding: 8px;
+    cursor: pointer;
+    min-width: 50px;
+    height: 25px;
+    width: auto;
+}
+
+.row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.row:nth-child(odd) {
+    background-color: #f1efef;
+}
+
+.row:hover {
+     background-color: #11c0c6;
+ }

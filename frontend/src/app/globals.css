@@ -40,3 +40,31 @@
 /*    color-scheme: dark;*/
 /*  }*/
 /*}*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*gap: 20px;*/
+    flex-direction: column;
+    background: #01d5d5;
+    font-family: Arial, Helvetica, sans-serif;
+    /*-webkit-font-smoothing: antialiased;*/
+    /*-moz-osx-font-smoothing: grayscale;*/
+}
+
+/*.basicBlock {*/
+/*    width: 1240px;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: start;*/
+/*    gap: 20px;*/
+
+/*}*/

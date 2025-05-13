@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { IOrder } from '@/app/models/IOrder';
+import styles from './RowStyle.module.css'
 
 type OrderProps = {item: IOrder};
 
@@ -10,8 +11,8 @@ const OrderComponent:FC<OrderProps> = ({ item}) => {
   };
 
   return (
-    <tr>
-      <td>{renderValue(item._id)}</td>
+    <tr className={styles.row}>
+      <td>{renderValue(item.id)}</td>
       <td>{renderValue(item.name)}</td>
       <td>{renderValue(item.surname)}</td>
       <td>{renderValue(item.email)}</td>

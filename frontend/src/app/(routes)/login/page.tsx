@@ -1,20 +1,21 @@
 'use client';
 
 import React, { useActionState, useEffect, useState } from 'react';
-import Form from 'next/form';
+// import Form from 'next/form';
 import { loginAction } from '@/app/service/api.service';
-import { useFormStatus } from 'react-dom';
+// import { useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
-import { loginSchema } from '@/app/validators/validationLogin';
+// import { loginSchema } from '@/app/validators/validationLogin';
+import LoginComponent from '@/app/components/login/LoginComponent';
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <button type="submit" disabled={pending}>
-      {pending ? 'Loading...' : 'Login'}
-    </button>
-  );
-}
+// function SubmitButton() {
+//   const { pending } = useFormStatus();
+//   return (
+//     <button type="submit" disabled={pending}>
+//       {pending ? 'Loading...' : 'Login'}
+//     </button>
+//   );
+// }
 
 const LoginPage =() => {
 const [state, formAction] = useActionState(loginAction, {accessToken: '', error: ''});
@@ -28,54 +29,58 @@ const router = useRouter();
 }
   }, [state.accessToken, router]);
 
-  const handleClientValidation = (formData: FormData) => {
-    const data = {
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
-    };
-
-    const { error } = loginSchema.validate(data, { abortEarly: false });
-
-    if (error) {
-      const errors: { email?: string; password?: string } = {};
-      error.details.forEach((err) => {
-        const field = err.path[0];
-        if (field === 'email' || field === 'password') {
-          errors[field] = err.message;
-        }
-      });
-
-      setFormErrors(errors);
-      return false;
-    }
-
-    setFormErrors({});
-    return true;
-  };
-
-  const customFormAction = async (formData: FormData) => {
-    const isValid = handleClientValidation(formData);
-    if (isValid) {
-      await formAction(formData);
-    }
-  };
+  // const handleClientValidation = (formData: FormData) => {
+  //   const data = {
+  //     email: formData.get('email') as string,
+  //     password: formData.get('password') as string,
+  //   };
+  //
+  //   const { error } = loginSchema.validate(data, { abortEarly: false });
+  //
+  //   if (error) {
+  //     const errors: { email?: string; password?: string } = {};
+  //     error.details.forEach((err) => {
+  //       const field = err.path[0];
+  //       if (field === 'email' || field === 'password') {
+  //         errors[field] = err.message;
+  //       }
+  //     });
+  //
+  //     setFormErrors(errors);
+  //     return false;
+  //   }
+  //
+  //   setFormErrors({});
+  //   return true;
+  // };
+  //
+  // const customFormAction = async (formData: FormData) => {
+  //   const isValid = handleClientValidation(formData);
+  //   if (isValid) {
+  //     await formAction(formData);
+  //   }
+  // };
 
   return (
     <div>
-      <Form action={customFormAction}>
-        <label>
-          Email
-          <input type="email" name="email" placeholder="Email" />
-          {formErrors.email && <p style={{ color: 'red' }}>{formErrors.email}</p>}
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" placeholder="Password" />
-          {formErrors.password && <p style={{ color: 'red' }}>{formErrors.password}</p>}
-        </label>
-        <SubmitButton />
-      </Form>
-      {state.error && <p style={{ color: 'red' }}>{state.error}</p>}
+      <LoginComponent formAction={formAction}
+                      formErrors={formErrors}
+                      setFormErrors={setFormErrors}
+                      errorMessage={state.error}/>
+      {/*<Form action={customFormAction}>*/}
+      {/*  <label>*/}
+      {/*    Email*/}
+      {/*    <input type="email" name="email" placeholder="Email" />*/}
+      {/*    {formErrors.email && <p style={{ color: 'red' }}>{formErrors.email}</p>}*/}
+      {/*  </label>*/}
+      {/*  <label>*/}
+      {/*    Password*/}
+      {/*    <input type="password" name="password" placeholder="Password" />*/}
+      {/*    {formErrors.password && <p style={{ color: 'red' }}>{formErrors.password}</p>}*/}
+      {/*  </label>*/}
+      {/*  <SubmitButton />*/}
+      {/*</Form>*/}
+      {/*{state.error && <p style={{ color: 'red' }}>{state.error}</p>}*/}
     </div>
   );
 }

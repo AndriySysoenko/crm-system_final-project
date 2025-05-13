@@ -1,4 +1,3 @@
-// 'use server';
 
 import { OrderDBResponse } from '@/app/models/OrderDBResponse';
 import { UserDBResponse } from '@/app/models/UserDBResponse';
@@ -48,7 +47,7 @@ export const loginAction = async (prevState: any, formData: FormData): Promise<{
 
     const data = await response.json();
     return { accessToken: data.accessToken, error: '' };
-  } catch (error) {
+  } catch {
     return { accessToken: '', error: 'An error occurred' };
   }
 };
@@ -61,4 +60,3 @@ export const logout = async () => {
     return router.push('/login');
   }
 }
-  // return router.push('/login');}

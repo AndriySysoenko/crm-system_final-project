@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
+import styles from './PaginationStyle.module.css'
 
 type PaginationProps = {
   currentPage: number;
@@ -39,16 +40,11 @@ const PaginationComponent:FC<PaginationProps> = ({ currentPage, totalPages, base
 
     return pages.map((page, index) =>
       page === '...' ? (
-        <span key={`dots-${index}`}> ... </span>
+        <span key={`dots-${index}`} className={styles.counter}> ... </span>
       ) : (
-        <Link key={page} href={buildUrl(page as number)}>
+        <Link key={page} href={buildUrl(page as number)} className={styles.link}>
           <button
-            disabled={page === currentPage}
-            style={{
-              fontWeight: page === currentPage ? 'bold' : 'normal',
-              margin: '0 4px',
-            }}
-          >
+            disabled={page === currentPage} className={styles.counter}          >
             {page}
           </button>
         </Link>
@@ -57,25 +53,21 @@ const PaginationComponent:FC<PaginationProps> = ({ currentPage, totalPages, base
   };
 
   return (
-    <div>
-      {/* Кнопка "<" */}
-      {currentPage > 1 ? (
-        <Link href={buildUrl(currentPage - 1)}>
-          <button>{"<"}</button>
+    <div className={styles.panel}>
+      {/* Кнопка "<" — зникає на першій сторінці */}
+      {currentPage > 1 && (
+        <Link href={buildUrl(currentPage - 1)} className={styles.link}>
+          <button className={styles.page}>{"<"}</button>
         </Link>
-      ) : (
-        <button disabled>{"<"}</button>
       )}
 
       {renderPages()}
 
-      {/* Кнопка ">" */}
-      {currentPage < totalPages ? (
-        <Link href={buildUrl(currentPage + 1)}>
-          <button>{">"}</button>
+      {/* Кнопка ">" — зникає на останній сторінці */}
+      {currentPage < totalPages && (
+        <Link href={buildUrl(currentPage + 1)} className={styles.link}>
+          <button className={styles.page}>{">"}</button>
         </Link>
-      ) : (
-        <button disabled>{">"}</button>
       )}
     </div>
   );

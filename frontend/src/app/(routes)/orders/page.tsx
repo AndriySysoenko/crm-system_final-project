@@ -1,12 +1,12 @@
-'use client';
+// 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { getOrders } from '@/app/service/api.service';
-import OrderComponent from '@/app/components/order/OrderComponent';
-import PaginationComponent from '@/app/components/pagination/PaginationComponent';
-import Link from 'next/link';
-import { useSearchParams, usePathname } from 'next/navigation';
-import { IOrder } from '@/app/models/IOrder';
+// import { getOrders } from '@/app/service/api.service';
+// import OrderComponent from '@/app/components/order/OrderComponent';
+// import PaginationComponent from '@/app/components/pagination/PaginationComponent';
+// import Link from 'next/link';
+// import { useSearchParams, usePathname } from 'next/navigation';
+// import { IOrder } from '@/app/models/IOrder';
 import OrderListComponent from '@/app/components/orders/OrderListComponent';
 import { AuthGuard } from '@/app/components/guard/AuthGuardComponent';
 

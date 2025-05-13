@@ -3,11 +3,14 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { logout } from '@/app/service/api.service';
-// import styles from './HeaderStyle.module.css'
+import styles from './HeaderStyle.module.css'
+import { useRouter } from 'next/navigation';
+
 
 const Menu = () => {
   const [role, setRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('accessToken');
@@ -33,25 +36,33 @@ const Menu = () => {
   if (loading) return null;
 
   return (
-    <header >
-      <div >
-        <Link href={'/orders'}><img src={'https://i.imgur.com/pzCIhtB.png'} alt={'Logo'}/></Link>
+    <header className={styles.headerStyle}>
+      <div className={styles.logo}>
+        <Link href={'/orders'}><img src= "/images/logo.png" alt={'Logo'}/></Link>
       </div>
-      <nav >
-        <ul >
-          {role === 'admin' && (
-          <li >
-            <Link href={'/adminPanel'}><img src ={'https://i.imgur.com/WwHt4eb.png'} alt={'Logo'}/>admin</Link>
-          </li>
-          )}
+      <nav className={styles.menu}>
+        {/*<ul className={styles.menu}>*/}
+        {/*  {role === 'admin' && (*/}
+        {/*    <li className={styles.viewItem}>*/}
+        {/*      admin*/}
+        {/*      /!*<Link href={'/adminPanel'}><img src="/images/adminPanel.png" alt={'Admin Panel'} /></Link>*!/*/}
+        {/*    </li>*/}
+        {/*  )}*/}
           {/*<li >*/}
           {/*  <Link href={'/logout'}>Logout</Link>*/}
           {/*</li>*/}
-          <button onClick={logout}>
-            <img src={'https://i.imgur.com/4gJ1g5f.png'} alt={'Logo'}/>
+          <p className={styles.text}>admin</p>
+          {role === 'admin' && (
+          <button onClick={()=>router.push('/adminPanel')} className={styles.button}>
+            <img src="/images/adminPanel.png" alt={'Admin Panel' } className={styles.viewItem}/>
+          </button>
+          )}
+
+          <button onClick={logout} className={styles.button}>
+            <img src="/images/logout.png" alt={'Logout'} className={styles.viewItem}/>
           </button>
 
-        </ul>
+        {/*</ul>*/}
       </nav>
 
     </header>

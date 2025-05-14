@@ -20,7 +20,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <button type="submit" disabled={pending} className={styles.button}>
-      {pending ? 'Loading...' : 'Login'}
+      {pending ? 'Loading...' : 'LOGIN'}
     </button>
   );
 }
@@ -40,6 +40,8 @@ const LoginComponent:FC<LoginProps> = ({ formErrors, setFormErrors, formAction, 
         const field = err.path[0];
         if (field === 'email' || field === 'password') {
           errors[field] = err.message;
+        } else if (err.type === 'any.custom') {
+          errors.password = err.message;
         }
       });
 

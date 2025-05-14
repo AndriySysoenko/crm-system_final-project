@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { logout } from '@/app/service/api.service';
 import styles from './HeaderStyle.module.css'
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 
 const Menu = () => {
@@ -38,33 +39,19 @@ const Menu = () => {
   return (
     <header className={styles.headerStyle}>
       <div className={styles.logo}>
-        <Link href={'/orders'}><img src= "/images/logo.png" alt={'Logo'}/></Link>
+        <Link href={'/orders'}><Image src="/images/logo.png" alt={'Logo'} width={100} height={100}/></Link>
       </div>
       <nav className={styles.menu}>
-        {/*<ul className={styles.menu}>*/}
-        {/*  {role === 'admin' && (*/}
-        {/*    <li className={styles.viewItem}>*/}
-        {/*      admin*/}
-        {/*      /!*<Link href={'/adminPanel'}><img src="/images/adminPanel.png" alt={'Admin Panel'} /></Link>*!/*/}
-        {/*    </li>*/}
-        {/*  )}*/}
-          {/*<li >*/}
-          {/*  <Link href={'/logout'}>Logout</Link>*/}
-          {/*</li>*/}
-          <p className={styles.text}>admin</p>
           {role === 'admin' && (
-          <button onClick={()=>router.push('/adminPanel')} className={styles.button}>
-            <img src="/images/adminPanel.png" alt={'Admin Panel' } className={styles.viewItem}/>
-          </button>
+            <><p className={styles.text}>admin</p>
+              <button onClick={()=>router.push('/adminPanel')} className={styles.button}>
+                <Image src="/images/adminPanel.png" alt={'Admin Panel'} width={50} height={50} className={styles.viewItem}/>
+              </button></>
           )}
-
           <button onClick={logout} className={styles.button}>
-            <img src="/images/logout.png" alt={'Logout'} className={styles.viewItem}/>
+            <Image src="/images/logout.png" alt={'Logout'} width={50} height={50} className={styles.viewItem}/>
           </button>
-
-        {/*</ul>*/}
       </nav>
-
     </header>
   );
 };

@@ -1,5 +1,14 @@
+/*.tableWrapper {*/
+/*    min-height: 500px; */
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    flex-direction: column;*/
+/*    background-color: white;*/
+/*}*/
+
 .allTable {
-    width: 90vw;
+    width: 99vw;
     border-collapse: collapse;
     border: 1px solid #ddd;
     margin: 10px 0 0 0;
@@ -8,18 +17,28 @@
 .header {
     background-color: #01d5d5;
     text-align: center;
-    font-weight: bold;
     height: 30px;
-    font-size: 19px;
+    font-size: 18px;
 }
 
 .header a {
     text-decoration: none;
     color: black;
 }
-    /*border: 1px solid #ddd;*/
-    /*padding: 8px;*/
-    /*cursor: pointer;*/
-    /*min-width: 50px;*/
-    /*width: auto;*/
+
+.spinner {
+    border: 6px solid #e0e0e0;
+    border-top: 6px solid #75b843;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 

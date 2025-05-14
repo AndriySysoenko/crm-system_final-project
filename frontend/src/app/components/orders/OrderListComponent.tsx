@@ -43,7 +43,7 @@ const OrderListComponent = () => {
     });
     return `/orders?${params}`;
   };
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className={styles.spinner}></div>;
   if (!orders.length) return <div>No orders</div>;
 
   return (
@@ -51,14 +51,14 @@ const OrderListComponent = () => {
       <table className={styles.allTable}>
         <thead className={styles.header}>
         <tr>
-          <th ><Link href={buildSortUrl('id')}>id</Link></th>
-          <th ><Link href={buildSortUrl('name')}>name</Link></th>
+          <th><Link href={buildSortUrl('id')}>id</Link></th>
+          <th><Link href={buildSortUrl('name')}>name</Link></th>
           <th><Link href={buildSortUrl('surname')}>surname</Link></th>
           <th ><Link href={buildSortUrl('email')}>email</Link></th>
           <th><Link href={buildSortUrl('phone')}>phone</Link></th>
           <th><Link href={buildSortUrl('age')}>age</Link></th>
           <th><Link href={buildSortUrl('course')}>course</Link></th>
-          <th ><Link href={buildSortUrl('course_format')}>course_format</Link></th>
+          <th><Link href={buildSortUrl('course_format')}>course_format</Link></th>
           <th><Link href={buildSortUrl('course_type')}>course_type</Link></th>
           <th><Link href={buildSortUrl('status')}>status</Link></th>
           <th><Link href={buildSortUrl('sum')}>sum</Link></th>

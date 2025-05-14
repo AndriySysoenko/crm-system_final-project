@@ -16,15 +16,23 @@ export const loginSchema = Joi.object({
   }),
 }).custom((value, helpers) => {
   const isDefaultAdmin = value.email === 'admin@gmail.com' && value.password === 'admin';
+  const latinOnlyRegex = /^[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/;
 
   if (!isDefaultAdmin) {
-    const strongPasswordRegex = /^\S*(?=\S{8,})(?=\S*[A-Z])(?=\S*\d)\S*$/;
+    if (!latinOnlyRegex.test(value.password)) {
+      return helpers.error('any.custom', {
+        message: 'Use Latin letters',
+      });
+    }
+
+    const strongPasswordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{8,}$/;
     if (!strongPasswordRegex.test(value.password)) {
       return helpers.error('any.custom', {
         message:
-          'Password must be at least 8 characters, contain 1 uppercase letter and 1 number',
+          '8 characters хХххх1хх',
       });
     }
+
   }
 
   return value;

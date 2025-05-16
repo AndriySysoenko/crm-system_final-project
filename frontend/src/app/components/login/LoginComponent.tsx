@@ -63,7 +63,7 @@ const LoginComponent:FC<LoginProps> = ({ formErrors, setFormErrors, formAction, 
   return (
     <div className={styles.main}>
       <Form action={customFormAction} className={styles.form}>
-        <label >
+        <label>
           Email
           <input type="email" name="email" placeholder="Email" className={styles.input}/>
           {formErrors.email && <p style={{ color: 'red' }}>{formErrors.email}</p>}

@@ -52,3 +52,13 @@
     font-size: 16px;
     font-weight: bold;
 }
+
+.spinner {
+    border: 10px solid #232222;
+    border-top: 10px solid #f6f1f1;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
+}

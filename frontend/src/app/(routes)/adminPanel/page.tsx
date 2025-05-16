@@ -10,13 +10,16 @@ import { AuthGuard } from '@/app/components/guard/AuthGuardComponent';
 
 const UsersPage:FC= () => {
   const [data, setData] = useState<UserDBResponse[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     (async () => {
       try {
         const users = await getUsers();
         setData(users);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -30,6 +33,7 @@ const UsersPage:FC= () => {
     setIsModalOpen(false)
   };
 
+  if (loading) return <div className={styles.spinner}></div>;
   return (
     <div className={styles.mainBlock}>
       <AuthGuard>

@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useSearchParams, usePathname } from 'next/navigation';
 import { IOrder } from '@/app/models/IOrder';
 import styles from './TableStyle.module.css'
+import Menu from '@/app/components/menu/Menu';
 
 const OrderListComponent = () => {
   const searchParams = useSearchParams();
@@ -48,6 +49,7 @@ const OrderListComponent = () => {
 
   return (
     <div>
+      <Menu/>
       <table className={styles.allTable}>
         <thead className={styles.header}>
         <tr>

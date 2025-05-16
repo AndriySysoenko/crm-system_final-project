@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "8f21e039-c16f-4066-a418-8c195b8b2e6c",
+		"name": "Final project CRM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14748145"
+	},
+	"item": [
+		{
+			"name": "all student",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/student?page=2&limit=25&sort=-course&field=course",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"student"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "limit",
+							"value": "25"
+						},
+						{
+							"key": "sort",
+							"value": "-course"
+						},
+						{
+							"key": "search",
+							"value": "QACX",
+							"disabled": true
+						},
+						{
+							"key": "field",
+							"value": "course"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth/loginAdmin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const body = pm.response.json();\r",
+							"pm.environment.set(\"accessToken\", body.accessToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjVwb3Nva2hAZ21haWwuY29tIiwic3ViIjoiZDk4MDk3NTMtZjhhYS00YjQ1LTllZjktOGY5MWM1NWQzNmZkIiwicGFzc3dvcmQiOiIkMmIkMTAkNnU2d1pJQlhoaWRZR1ZGVUJlbk1lT3NkWmFEU3ZhcVNZa0xXMnBDRE4uMDFIOVJGRUpKeUciLCJpYXQiOjE3NDA2NzU1MzEsImV4cCI6MTc0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/auth/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth/loginManager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const body = pm.response.json();\r",
+							"pm.environment.set(\"accessToken\", body.accessToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"dbsjryg@gmail.com\",\r\n    \"password\": \"frJkS07gh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/auth/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/createManager",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Oleg\",\r\n    \"email\": \"posokh2@gmail.com\",\r\n    \"surname\": \"Kachka\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/user",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/user",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"user"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "-created_at",
+							"disabled": true
+						},
+						{
+							"key": "field",
+							"value": "created_at",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth/generate-activation-link",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"dbsjryg@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/auth/generate-activation-link",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"generate-activation-link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth/activate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"activationToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODIxZTdiMGRlOTMwYTIwNzA5Y2ExOWYiLCJlbWFpbCI6ImRic2pyeWdAZ21haWwuY29tIiwicm9sZSI6Im1hbmFnZXIiLCJpYXQiOjE3NDcyNTI5NjksImV4cCI6MTc0NzI1NDc2OX0.s3Fmu9SCwTLK7qJpjyDQTPC5Bus43Oj8Fn6CeEEhsKw\",\r\n    \"password\": \"frJkS07gh\",\r\n    \"confirmPassword\": \"frJkS07gh\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/auth/activate",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/auth/logout",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,52 @@
+.panel {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    background-color: white;
+    height: 60px;
+}
+
+.page {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40%;
+    cursor: pointer;
+    background-color: #01d5d5;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+}
+
+.page:hover {
+    background-color: #11c0c6;
+
+}
+
+.counter {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #01d5d5;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+}
+
+.counter:hover {
+    background-color: #11c0c6;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+}
